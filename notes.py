@@ -39,8 +39,10 @@ class NotesMod(loader.Module):
                "notes_header": "<b>Saved notes:</b>\n\n",
                "notes_item": "<b>•</b> <code>{}</code>",
                "delnote_args": "<b>What note should be deleted?</b>",
-               "delnote_done": "<b>Note deleted</b>", "delnotes_none": "<b>There are no notes to be cleared</b>",
-               "delnotes_done": "<b>All notes cleared</b>", "notes_none": "<b>There are no saved notes</b>"}
+               "delnote_done": "<b>Note deleted</b>",
+               "delnotes_none": "<b>There are no notes to be cleared</b>",
+               "delnotes_done": "<b>All notes cleared</b>",
+               "notes_none": "<b>There are no saved notes</b>"}
 
     def config_complete(self):
         self.name = self.strings["name"]
@@ -58,7 +60,7 @@ class NotesMod(loader.Module):
             return
         await utils.answer(message, await self._db.fetch_asset(asset_id))
 
-    async def delnotescmd(self, message):
+    async def delallnotescmd(self, message):
         """Deletes all the saved notes"""
         if not self._db.get(__name__, "notes", {}):
             await utils.answer(message, self.strings["delnotes_none"])
